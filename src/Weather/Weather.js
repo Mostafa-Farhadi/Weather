@@ -6,22 +6,55 @@ import { Grid, Paper, Typography, TextField, makeStyles } from '@material-ui/cor
 import 'remixicon/fonts/remixicon.css';
 
 // pictures
-import warm from './warm.jpg';
-import cold from './cold.jpg';
-
+import clear from './clear.png';
+import clouds from './clouds.png';
+import rain from './rain.png';
+import snow from './snow.png';
+import haze from './haze.png';
+import mist from './mist.png';
 
 const useStyles = makeStyles ((theme) =>({
-    warm: {
+    default: {
         width: theme.spacing(50),
         height: theme.spacing(70),
-        backgroundImage: `url(${warm})`,
-        color: 'black'
-    },
-    cold: {
-        width: theme.spacing(50),
-        height: theme.spacing(70),
-        backgroundImage: `url(${cold})`,
+        backgroundColor: '#ff7979',
         color: 'white'
+    },
+    clear: {
+        width: theme.spacing(50),
+        height: theme.spacing(70),
+        backgroundImage: `url(${clear})`,
+        color: '#FC427B'
+    },
+    clouds: {
+        width: theme.spacing(50),
+        height: theme.spacing(70),
+        backgroundImage: `url(${clouds})`,
+        color: '#FC427B'
+    },
+    rain: {
+        width: theme.spacing(50),
+        height: theme.spacing(70),
+        backgroundImage: `url(${rain})`,
+        color: '#FC427B'
+    },
+    snow: {
+        width: theme.spacing(50),
+        height: theme.spacing(70),
+        backgroundImage: `url(${snow})`,
+        color: '#FC427B'
+    },
+    haze: {
+        width: theme.spacing(50),
+        height: theme.spacing(70),
+        backgroundImage: `url(${haze})`,
+        color: '#FC427B'
+    },
+    mist: {
+        width: theme.spacing(50),
+        height: theme.spacing(70),
+        backgroundImage: `url(${mist})`,
+        color: '#FC427B'
     },
     input: {
         width: theme.spacing(35),
@@ -53,6 +86,11 @@ const useStyles = makeStyles ((theme) =>({
     weather: {
         marginTop: theme.spacing(1),
         fontSize: 40,
+    },
+    weatheIcon: {
+        fontSize: 40,
+        marginLeft: 10,
+        marginTop: 15,
     }
 }));
 
@@ -65,25 +103,48 @@ function Weather() {
     const classes = useStyles();
     const [query, setQuery] = useState('');
     const [weather, setWeather] = useState({});
-    const [bg, setBg] = useState(true);
+    const [background, setBackground] = useState(classes.default);
+    const [icon, setIcon] = useState('')
 
     
     const searchPress = event => {
         if (event.key === 'Enter') {
             fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
             .then(response => response.json())
-            .then(response => {
-                setWeather(response);
+            .then(data => {
+                setWeather(data);
                 setQuery('');
-                if (response.main.temp < 10) {
-                    setBg(false)
-                } else {
-                    setBg(true)
+                if (data === !null) {
+                    setIcon(true)
+                }
+                if (data.weather[0].main === 'Clouds') {
+                    setIcon('ri-cloud-line');
+                    setBackground(classes.clouds);
+                }else if (data.weather[0].main === 'Clear') {
+                    setIcon('ri-sun-line');
+                    setBackground(classes.clear);
+                }else if (data.weather[0].main === 'Snow') {
+                    setIcon('ri-snowy-line');
+                    setBackground(classes.snow);
+                }else if (data.weather[0].main === 'Rain') {
+                    setIcon('ri-rainy-line');
+                    setBackground(classes.rain);
+                }else if (data.weather[0].main === 'Haze') {
+                    setIcon('ri-haze-line');
+                    setBackground(classes.haze);
+                }else if (data.weather[0].main === 'Mist') {
+                    setIcon('ri-mist-line');
+                    setBackground(classes.mist);
+                }
+                else {
+                    setIcon('');
+                    setBackground(classes.default);
                 }
             })
             .catch((err) => {
                 alert("Incorrect city!")
             });
+            
         };
     };
 
@@ -99,13 +160,15 @@ function Weather() {
 
     return (
         <Grid container justify="center">
-            <Paper elevation={10} className={`${bg ? classes.warm : classes.cold}`}>
+            <Paper elevation={10} className={background}>
                 <Grid container justify="center">
                     <TextField 
+                        label="City name..."
                         value={query} 
                         onChange={(event) => setQuery(event.target.value)} 
                         onKeyPress={searchPress} 
-                        variant="outlined" 
+                        autoFocus
+                        variant="standard" 
                         className={classes.input} />
                 </Grid>
                 {(typeof weather.main != "undefined") ? (
@@ -125,9 +188,12 @@ function Weather() {
                             {Math.round(weather.main.temp)}°C {/*Alt 0176*/}
                         </Typography>
                     </Grid>
-                    <Grid container direction="column" justify="center" alignItems="center">
+                    <Grid container direction="row" justify="center" alignItems="center">
                         <Typography paragraph className={classes.weather}>
                             {weather.weather[0].main}
+                        </Typography>
+                        <Typography paragraph className={classes.weatheIcon}>
+                            <i className={icon}></i>
                         </Typography>
                     </Grid>
                 </Grid>
