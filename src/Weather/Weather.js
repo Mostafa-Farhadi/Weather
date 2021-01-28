@@ -3,95 +3,62 @@ import React, {useState} from 'react';
 // material ui core components
 import { Grid, Paper, Typography, TextField, makeStyles } from '@material-ui/core';
 
-import 'remixicon/fonts/remixicon.css';
+// icons
+import clouds from '../assets/img/icons/clouds.png';
+import clear from '../assets/img/icons/clear.png';
+import snow from '../assets/img/icons/snow.png';
+import rain from '../assets/img/icons/rain.png';
+import haze from '../assets/img/icons/haze.png';
+import mist from '../assets/img/icons/mist.png';
+import fog from '../assets/img/icons/fog.png';
 
-// pictures
-import clear from './clear.png';
-import clouds from './clouds.png';
-import rain from './rain.png';
-import snow from './snow.png';
-import haze from './haze.png';
-import mist from './mist.png';
+
 
 const useStyles = makeStyles ((theme) =>({
+    root: {
+        marginTop: 80,
+    },
     default: {
-        width: theme.spacing(50),
-        height: theme.spacing(70),
-        backgroundColor: '#ff7979',
-        color: 'white'
+        backgroundColor: '#40739e',
     },
     clear: {
-        width: theme.spacing(50),
-        height: theme.spacing(70),
-        backgroundImage: `url(${clear})`,
-        color: '#FC427B'
+        backgroundColor: '#f1c40f',
     },
     clouds: {
-        width: theme.spacing(50),
-        height: theme.spacing(70),
-        backgroundImage: `url(${clouds})`,
-        color: '#FC427B'
+        backgroundColor: '#273c75',
     },
     rain: {
-        width: theme.spacing(50),
-        height: theme.spacing(70),
-        backgroundImage: `url(${rain})`,
-        color: '#FC427B'
+        backgroundColor: '#16a085',
     },
     snow: {
-        width: theme.spacing(50),
-        height: theme.spacing(70),
-        backgroundImage: `url(${snow})`,
-        color: '#FC427B'
+        backgroundColor: '#f5f6fa',
     },
     haze: {
-        width: theme.spacing(50),
-        height: theme.spacing(70),
-        backgroundImage: `url(${haze})`,
-        color: '#FC427B'
+        backgroundColor: '#95a5a6',
     },
     mist: {
-        width: theme.spacing(50),
-        height: theme.spacing(70),
-        backgroundImage: `url(${mist})`,
-        color: '#FC427B'
+        backgroundColor: '#8e44ad',
     },
     input: {
-        width: theme.spacing(35),
-        marginTop: theme.spacing(2),
-    },
-    show: {
-        width: theme.spacing(13),
-        height: theme.spacing(7),
-        marginTop: theme.spacing(2),
-        marginLeft: theme.spacing(1),
-        color: '#ecf0f1',
-        backgroundColor: '#222f3e',
-        '&:hover': {
-            backgroundColor: "#576574",
-        },
+        width: 300,
+        marginTop: 10,
     },
     city: {
-        marginTop: theme.spacing(5),
-        fontSize: 30,
+        marginTop: 50,
     },
     date: {
-        marginTop: theme.spacing(1),
-        fontSize: 20,
+        marginTop: 40,
     },
     temperature: {
-        marginTop: theme.spacing(7),
-        fontSize: 60,
+        marginTop: 50,
     },
     weather: {
-        marginTop: theme.spacing(1),
-        fontSize: 40,
+        marginTop: 50,
     },
     weatheIcon: {
-        fontSize: 40,
         marginLeft: 10,
-        marginTop: 15,
-    }
+        marginTop: 55,
+    },
 }));
 
 const api = {
@@ -118,22 +85,25 @@ function Weather() {
                     setIcon(true)
                 }
                 if (data.weather[0].main === 'Clouds') {
-                    setIcon('ri-cloud-line');
+                    setIcon(clouds);
                     setBackground(classes.clouds);
                 }else if (data.weather[0].main === 'Clear') {
-                    setIcon('ri-sun-line');
+                    setIcon(clear);
                     setBackground(classes.clear);
                 }else if (data.weather[0].main === 'Snow') {
-                    setIcon('ri-snowy-line');
+                    setIcon(snow);
                     setBackground(classes.snow);
                 }else if (data.weather[0].main === 'Rain') {
-                    setIcon('ri-rainy-line');
+                    setIcon(rain);
                     setBackground(classes.rain);
                 }else if (data.weather[0].main === 'Haze') {
-                    setIcon('ri-haze-line');
+                    setIcon(haze);
                     setBackground(classes.haze);
                 }else if (data.weather[0].main === 'Mist') {
-                    setIcon('ri-mist-line');
+                    setIcon(mist);
+                    setBackground(classes.mist);
+                }else if (data.weather[0].main === 'Fog') {
+                    setIcon(fog);
                     setBackground(classes.mist);
                 }
                 else {
@@ -159,12 +129,13 @@ function Weather() {
     };
 
     return (
-        <Grid container justify="center">
-            <Paper elevation={10} className={background}>
+        <Grid container justify="center" className={classes.root}>
+            <Paper elevation={10} className={background} style={{width: 400, height: 600, color: '#e84118',}}>
                 <Grid container justify="center">
                     <TextField 
                         label="City name..."
-                        value={query} 
+                        value={query}
+                        color="secondary"
                         onChange={(event) => setQuery(event.target.value)} 
                         onKeyPress={searchPress} 
                         autoFocus
@@ -174,26 +145,26 @@ function Weather() {
                 {(typeof weather.main != "undefined") ? (
                 <Grid>
                     <Grid container justify="center" alignItems="center">
-                        <Typography paragraph className={classes.city}>
+                        <Typography paragraph variant="h4" className={classes.city}>
                             {weather.name}, {weather.sys.country}
                         </Typography>
                     </Grid>
                     <Grid container justify="center" alignItems="center">
-                        <Typography paragraph className={classes.date}>
+                        <Typography paragraph variant="h6" className={classes.date}>
                             {dateBuilder(new Date())}
                         </Typography>
                     </Grid>
                     <Grid container direction="column" justify="center" alignItems="center">
-                        <Typography paragraph className={classes.temperature}>
+                        <Typography paragraph variant="h2" className={classes.temperature}>
                             {Math.round(weather.main.temp)}°C {/*Alt 0176*/}
                         </Typography>
                     </Grid>
                     <Grid container direction="row" justify="center" alignItems="center">
-                        <Typography paragraph className={classes.weather}>
+                        <Typography paragraph variant="h5" className={classes.weather}>
                             {weather.weather[0].main}
                         </Typography>
-                        <Typography paragraph className={classes.weatheIcon}>
-                            <i className={icon}></i>
+                        <Typography paragraph variant="h5" className={classes.weatheIcon}>
+                            <img src={icon} alt="weather"/>
                         </Typography>
                     </Grid>
                 </Grid>
