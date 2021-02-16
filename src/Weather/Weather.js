@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 // icons
 import clouds from '../assets/img/clouds.png';
@@ -11,26 +11,62 @@ import fog from '../assets/img/fog.png';
 
 import '../assets/css/style.css';
 
-const api = {
-    key: '26eb107ac36fa5a8381d27d5206ad752',
-    base: 'https://api.openweathermap.org/data/2.5/'
-};
-
 function Weather() {
     const [query, setQuery] = useState('');
     const [weather, setWeather] = useState({});
     const [icon, setIcon] = useState('')
 
+    useEffect(() => {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                location => {
+                    fetch(`https://api.opencagedata.com/geocode/v1/json?key=39429049e03b4a9caebbfef891d072ab&q=${encodeURIComponent(location.coords.latitude + ',' + location.coords.longitude)}&pretty=1&no_annotations=1`)
+                    .then(response => response.json())
+                    .then (data => 
+                        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${data.results[0].components.city}&units=metric&APPID=26eb107ac36fa5a8381d27d5206ad752`)
+                        .then(response => response.data())
+                        .then(data => {
+                            setWeather(data);
+                            if (data === !null) {
+                                setIcon('')
+                            }
+                            if (data.weather[0].main === 'Clouds') {
+                                setIcon(clouds);
+                            }else if (data.weather[0].main === 'Clear') {
+                                setIcon(clear);
+                            }else if (data.weather[0].main === 'Snow') {
+                                setIcon(snow);
+                            }else if (data.weather[0].main === 'Rain') {
+                                setIcon(rain);
+                            }else if (data.weather[0].main === 'Haze') {
+                                setIcon(haze);
+                            }else if (data.weather[0].main === 'Mist') {
+                                setIcon(mist);
+                            }else if (data.weather[0].main === 'Fog') {
+                                setIcon(fog);
+                            }
+                            else {
+                                setIcon('');
+                            }
+                        })
+                    )
+                }
+            )
+        }else {
+            alert("Geolocation is not supported by this browser.")
+        }
+    }, [])
+
     
     const searchPress = event => {
         if (event.key === 'Enter') {
-            fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
+            fetch(`https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&APPID=26eb107ac36fa5a8381d27d5206ad752`)
             .then(response => response.json())
             .then(data => {
                 setWeather(data);
                 setQuery('');
                 if (data === !null) {
-                    setIcon(true)
+                    setIcon('')
                 }
                 if (data.weather[0].main === 'Clouds') {
                     setIcon(clouds);
