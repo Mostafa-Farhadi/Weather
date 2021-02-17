@@ -1,9 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap');
+
 body {
-    color: #555;
+    color: #eee;
     background: #ecf0f3;
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: 'Kalam', cursive;
 }
 
 .root {
@@ -13,12 +16,14 @@ body {
     background: #ecf0f3;
     box-shadow: 13px 13px 20px #cbced1, -13px -13px 20px #ffffff;
     width: 70vw;
-    height: 600px;
+    height: 700px;
     padding: 60px 35px 35px 35px;
+    background: linear-gradient(to top, #141e30, #243b55);
 }
 
 .input {
     border: none;
+    color: #eee;
     outline: none;
     background: none;
     font-size: 20px;
@@ -45,12 +50,12 @@ body {
 }
 
 .temprature {
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 600;
 }
 
 .weather {
-    font-size: 40px;
+    font-size: 36px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -60,4 +65,29 @@ body {
 .weather-icon {
     font-size: 40px;
     margin-left: 10px;
+}
+
+.forecast {
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+.forecast p {
+    padding: 0 30px;
+}
+
+.min {
+    font-size: 16px;
+}
+
+.max {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.weather-forecast {
+    font-size: 24px;
 }
