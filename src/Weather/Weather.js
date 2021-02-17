@@ -24,7 +24,7 @@ function Weather() {
                     .then(response => response.json())
                     .then (data => 
                         fetch(`https://api.openweathermap.org/data/2.5/weather?q=${data.results[0].components.city}&units=metric&APPID=26eb107ac36fa5a8381d27d5206ad752`)
-                        .then(response => response.data())
+                        .then(response => response.json())
                         .then(data => {
                             setWeather(data);
                             if (data === !null) {
