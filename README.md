@@ -5,7 +5,7 @@ It was made using this tools:
 * Material UI framework
 * openweathermap API
 
-[See live in codesandbox.io](https://codesandbox.io/s/sharp-golick-8n7dq)
+[See live in codesandbox.io](https://codesandbox.io/s/strange-sky-1kimc?file=/src/Weather/Weather.js)
 
 
 ![GitHub Logo](/Weather.png)
