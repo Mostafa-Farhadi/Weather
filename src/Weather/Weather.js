@@ -61,11 +61,12 @@ function Weather() {
         seventhDay: d.getDay() + 7,
     }
 
+    // When for the first time page is loaded
     useEffect(() => {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 location => {
-                    axios.get(`https://api.openweathermap.org/data/2.5/onecall?${encodeURIComponent(location.coords.latitude)}&lon=${encodeURIComponent(location.coords.longitude)}&units=metric&exclude=hourly,minutely&appid=8277afc975ef94a282c1e6077eb4320c`)
+                    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${encodeURIComponent(location.coords.latitude)}&lon=${encodeURIComponent(location.coords.longitude)}&units=metric&exclude=hourly,minutely&appid=8277afc975ef94a282c1e6077eb4320c`)
                     .then(response => {
                         console.log(response.data)
                         setDetails({
@@ -113,6 +114,7 @@ function Weather() {
                 })}      
     }, [])
 
+    //  When user write name of a city and click on 'ENTER' button
     const searchPress = event => {
         if (event.key === 'Enter') {
             axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&APPID=26eb107ac36fa5a8381d27d5206ad752`)
