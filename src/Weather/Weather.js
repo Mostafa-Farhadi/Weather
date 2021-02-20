@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import '../assets/css/style.css'
+import ReactApexChart from "react-apexcharts";
 
 // icons
 import clouds from '../assets/img/clouds.png';
@@ -29,6 +30,18 @@ function Weather() {
     const [cityName, setCityName] = useState({
         city: '',
         country: '',
+    })
+
+    const [datas, setDatas] = useState({
+        options: {
+            xaxis: {
+                categories: []
+            },
+        },
+        
+        series: [{
+                data: [],
+            }],
     })
 
     const dateBuilder = (d) => {
@@ -66,9 +79,8 @@ function Weather() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 location => {
-                    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${encodeURIComponent(location.coords.latitude)}&lon=${encodeURIComponent(location.coords.longitude)}&units=metric&exclude=hourly,minutely&appid=8277afc975ef94a282c1e6077eb4320c`)
+                    axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${encodeURIComponent(location.coords.latitude)}&lon=${encodeURIComponent(location.coords.longitude)}&units=metric&exclude=minutely,alerts&appid=8277afc975ef94a282c1e6077eb4320c`)
                     .then(response => {
-                        console.log(response.data)
                         setDetails({
                             temperature: response.data.current.temp,
                             weather: response.data.current.weather[0].main,
@@ -105,10 +117,66 @@ function Weather() {
 
                     axios.get(`https://api.opencagedata.com/geocode/v1/json?key=39429049e03b4a9caebbfef891d072ab&q=${encodeURIComponent(location.coords.latitude + ',' + location.coords.longitude)}&language=en&pretty=1&no_annotations=1`)
                     .then(response => {
-                        // console.log(response.data.results[0].components)
                         setCityName({
                             city: response.data.results[0].components.city,
                             country: response.data.results[0].components.country,
+                        })
+                        axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${response.data.results[0].components.city}&units=metric&cnt=16&appid=8277afc975ef94a282c1e6077eb4320c`)
+                        .then(response => {
+                        let temperatursArr = []
+                        let hoursArr = []
+
+                        response.data.list.forEach(element => {
+                            temperatursArr.push(Math.floor(element.main.temp))
+                            hoursArr.push(element.dt_txt)
+                        })
+
+                        setDatas({
+                            options: {
+                                chart: {
+                                    zoom: {
+                                        enabled: false
+                                    },
+                                    foreColor: '#eee',
+                                },
+                                dataLabels: {
+                                    enabled: false,
+                                },
+                                title: {
+                                    text: 'Weather',
+                                    align: 'left',
+                                },
+                                subtitle: {
+                                    text: 'Hourly',
+                                    align: 'left',
+                                },
+                                stroke: {
+                                    curve: 'smooth'
+                                },
+                                xaxis: {
+                                    type: 'datetime',
+                                    categories: hoursArr,
+                                },
+                                tooltip: {
+                                    x: {
+                                        format: 'dd MMMM hh:00'
+                                    },
+                                },
+                                markers: {
+                                    size: 4,
+                                    colors: ["#2e86de"],
+                                    strokeWidth: 0,
+                                    hover: {
+                                        size: 7,
+                                    }
+                                },
+                            },
+
+                            series: [{
+                                name: "Temperature",
+                                    data: temperatursArr,
+                                }],
+                            })
                         })
                     })
                 })}      
@@ -119,12 +187,10 @@ function Weather() {
         if (event.key === 'Enter') {
             axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&APPID=26eb107ac36fa5a8381d27d5206ad752`)
             .then(response => {
-                console.log(response.data);
                 const lat = response.data.coord.lat
                 const lon = response.data.coord.lon
-                axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&units=metric&exclude=hourly,minutely&appid=8277afc975ef94a282c1e6077eb4320c`)
+                axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${encodeURIComponent(lat)}&lon=${encodeURIComponent(lon)}&units=metric&exclude=minutely,alerts&appid=8277afc975ef94a282c1e6077eb4320c`)
                 .then(response => {
-                    console.log(response.data)
                     setDetails({
                         temperature: response.data.current.temp,
                         weather: response.data.current.weather[0].main,
@@ -140,7 +206,6 @@ function Weather() {
 
                 axios.get(`https://api.opencagedata.com/geocode/v1/json?key=39429049e03b4a9caebbfef891d072ab&q=${encodeURIComponent(lat + ',' + lon)}&language=en&pretty=1&no_annotations=1`)
                 .then(response => {
-                    // console.log(response.data.results[0].components)
                     setCityName({
                         city: response.data.results[0].components.city,
                         country: response.data.results[0].components.country,
@@ -172,9 +237,82 @@ function Weather() {
             .catch((err) => {
                 alert("Incorrect city!")
             });
-            
+
+            axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${query}&units=metric&cnt=16&appid=8277afc975ef94a282c1e6077eb4320c`)
+            .then(response => {
+
+            let temperatursArr = []
+            let hoursArr = []
+
+            response.data.list.forEach(element => {
+                temperatursArr.push(Math.floor(element.main.temp))
+                hoursArr.push(element.dt_txt)
+            })
+
+            setDatas({
+                options: {
+                    chart: {
+                        zoom: {
+                            enabled: false
+                        },
+                        foreColor: '#eee'
+                    },
+                    dataLabels: {
+                        enabled: false,
+                    },
+                    title: {
+                        text: 'Weather',
+                        align: 'left',
+                    },
+                    subtitle: {
+                        text: 'Hourly',
+                        align: 'left',
+                    },
+                    stroke: {
+                        curve: 'smooth'
+                    },
+                    xaxis: {
+                        type: 'datetime',
+                        categories: hoursArr,
+                    },
+                    tooltip: {
+                        x: {
+                            format: 'dd MMMM hh:00'
+                        },
+                    },
+                    markers: {
+                        size: 4,
+                        colors: ["#2e86de"],
+                        strokeWidth: 0,
+                        hover: {
+                            size: 7,
+                        }
+                    },
+                },
+
+                series: [{
+                    name: "Temperature",
+                        data: temperatursArr,
+                    }],
+            })
+        })
+
         };
     };
+
+    let weatherHourlyPlot = ''
+    if (datas.options.xaxis.categories[0]) {
+        weatherHourlyPlot = (
+                <ReactApexChart
+                    className="plot"
+                    options={datas.options}
+                    series={datas.series}
+                    type="area"
+                    width="1070"
+                    height= "200"
+                />
+        )
+    }
 
     return (
         <div className="root">
@@ -199,6 +337,9 @@ function Weather() {
                 <div>{futureDays(dateObj.fifthDay)} <p className="min">{Math.round(details.fifthDay.min)}</p> <p className="max">{Math.round(details.fifthDay.max)}</p><p className="weather-forecast">{details.fifthDay.weather}</p> </div>
                 <div>{futureDays(dateObj.sixthDay)} <p className="min">{Math.round(details.sixthDay.min)}</p> <p className="max">{Math.round(details.sixthDay.max)}</p><p className="weather-forecast">{details.sixthDay.weather}</p> </div>
                 <div>{futureDays(dateObj.seventhDay)} <p className="min">{Math.round(details.seventhDay.min)}</p> <p className="max">{Math.round(details.seventhDay.max)}</p><p className="weather-forecast">{details.seventhDay.weather}</p> </div>
+            </div>
+            <div className="weather-hourly">
+                {weatherHourlyPlot}
             </div>
         </div>
     )
