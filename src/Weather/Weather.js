@@ -204,6 +204,14 @@ function Weather() {
                     })
                 })
 
+                axios.get(`https://api.opencagedata.com/geocode/v1/json?key=39429049e03b4a9caebbfef891d072ab&q=${encodeURIComponent(lat + ',' + lon)}&language=en&pretty=1&no_annotations=1`)
+                .then(response => {
+                    setCityName({
+                        city: response.data.results[0].components.city,
+                        country: response.data.results[0].components.country,
+                    })
+                })
+
                 setQuery('');
                 if (response.data === !null) {
                     setIcon('')
