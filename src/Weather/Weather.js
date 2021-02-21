@@ -121,7 +121,7 @@ function Weather() {
                             city: response.data.results[0].components.city,
                             country: response.data.results[0].components.country,
                         })
-                        axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${cityName.city}&units=metric&cnt=16&appid=8277afc975ef94a282c1e6077eb4320c`)
+                        axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${response.data.results[0].components.city}&units=metric&cnt=16&appid=8277afc975ef94a282c1e6077eb4320c`)
                         .then(response => {
                         let temperatursArr = []
                         let hoursArr = []
@@ -180,7 +180,7 @@ function Weather() {
                         })
                     })
                 })}      
-    }, [cityName.city])
+    }, [])
 
     //  When user write name of a city and click on 'ENTER' button
     const searchPress = event => {
