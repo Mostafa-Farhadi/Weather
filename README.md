@@ -1,6 +1,6 @@
 # Weather-App
 
-It was made using this tools:
+It is made using this tools:
 * Reactjs
 * React-Redux
 * Apex Charts
