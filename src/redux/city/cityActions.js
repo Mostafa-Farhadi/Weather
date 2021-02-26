@@ -38,6 +38,14 @@ export const fetchCity = (cityName) => {
                     const hourlyData = response.data
                     dispatch(fetchCitySeuccess(onlineData, dailyData, hourlyData))
                 })
+                .catch(error => {
+                    const errorMsg = error.message
+                    dispatch(fetchCityFailure(errorMsg))
+                })
+            })
+            .catch(error => {
+                const errorMsg = error.message
+                dispatch(fetchCityFailure(errorMsg))
             })
         })
         .catch(error => {
