@@ -1,13 +1,15 @@
-import React from 'react';
+import React from 'react'
+import { Provider } from 'react-redux'
 
-// my component
 import Weather from './Weather/Weather'
+import store from './redux/store'
+
 function App() {
   return (
-    <>
+    <Provider store={store}>
     <Weather />
-    </>
+    </Provider>
   )
 }
 
-export default App;
+export default App
