@@ -1,11 +1,10 @@
 # Weather-App
 
 It was made using this tools:
-* Reactjs library
+* Reactjs
+* React-Redux
 * Apex Charts
 * openweathermap API
+* Axios
 
-[See live in codesandbox.io](https://codesandbox.io/s/red-brook-brj7o)
-
-
-![GitHub Logo](/Weather.png)
+[See live in codesandbox.io](https://codesandbox.io/s/weather-s092x)
