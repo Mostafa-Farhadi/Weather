@@ -18,10 +18,12 @@ function Daily(props) {
                     return (
                         <Days
                             key = {uuidv4()}
-                            time = {element.dt}
-                            minTemp={element.temp.min}
+                            weekDay = {element.dt}
                             maxTemp={element.temp.max}
-                            weather={element.weather[0].main}
+                            minTemp={element.temp.min}
+                            weatherIcon={element.weather[0].main}
+                            humidity={element.humidity}
+                            windSpeed={element.wind_speed}
                         />
                     )}
                 )}

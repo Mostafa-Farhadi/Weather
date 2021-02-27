@@ -1,21 +1,25 @@
 import React from 'react'
 
 function Days(props) {
-    const {time, minTemp, maxTemp, weather} = props
+    const {weekDay, maxTemp, minTemp, weatherIcon, humidity, windSpeed} = props
     const futureDays = (millisecond) => {
         const date = new Date(millisecond * 1000)
         let dayNumber = date.getDay()
         let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-        let day = days[dayNumber]
+        let day = days[dayNumber].slice(0,3)
         return `${day}`
     }
 
     return (
-        <div className="weather-forecast">
-            <p className="day">{futureDays(time)}</p>
-            <p className="min">{Math.round(minTemp)}</p>
-            <p className="max">{Math.round(maxTemp)}</p>
-            <p className="weather-forecast">{weather}</p>
+        <div className="daily-container">
+            <p className="week-day">{futureDays(weekDay)}</p>
+            <div className="temperature-container">
+                <p className="max-temperature">{Math.round(maxTemp)}°C</p>
+                <p className="min-temperature">{Math.round(minTemp)}°C</p>
+            </div>
+            <p className="weather-icon">{weatherIcon}</p>
+            <p className="humidity">{humidity}%</p>
+            <p className="wind-speed">{windSpeed} m/s</p>
         </div>
     )
 }
