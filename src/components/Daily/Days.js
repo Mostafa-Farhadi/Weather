@@ -1,7 +1,7 @@
 import React from 'react'
 
 function Days(props) {
-    const {weekDay, maxTemp, minTemp, weatherIcon, humidity, windSpeed} = props
+    const {weekDay, maxTemp, minTemp, humidity, windSpeed, iconcode} = props
     const futureDays = (millisecond) => {
         const date = new Date(millisecond * 1000)
         let dayNumber = date.getDay()
@@ -17,7 +17,7 @@ function Days(props) {
                 <p className="max-temperature">{Math.round(maxTemp)}°C</p>
                 <p className="min-temperature">{Math.round(minTemp)}°C</p>
             </div>
-            <p className="weather-icon">{weatherIcon}</p>
+            <img className="weather-icon" src={`http://openweathermap.org/img/w/${iconcode}.png`} alt="icon"/>
             <p className="humidity">{humidity}%</p>
             <p className="wind-speed">{windSpeed} m/s</p>
         </div>

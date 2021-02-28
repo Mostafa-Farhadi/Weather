@@ -21,9 +21,9 @@ function Daily(props) {
                             weekDay = {element.dt}
                             maxTemp={element.temp.max}
                             minTemp={element.temp.min}
-                            weatherIcon={element.weather[0].main}
                             humidity={element.humidity}
                             windSpeed={element.wind_speed}
+                            iconcode={element.weather[0].icon}
                         />
                     )}
                 )}
