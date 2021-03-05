@@ -6,24 +6,20 @@ function Hourly(props) {
     const {cityData} = props;
     let temperatursArr = []
     let hoursArr = []
-    let object = {}
-    let dataArr = []
+    let plotDetail = {}
+    let plotDataArr = []
     
-    if (cityData.loading) {
-        temperatursArr = []
-        hoursArr = []
-        object = {}
-        dataArr = []
-    } else {
+    if (!cityData.loading) {
         cityData.hourlyData.list.forEach(element => {
             temperatursArr.push(Math.floor(element.main.temp))
-            hoursArr.push(element.dt)
+            const timezone = cityData.hourlyData.city.timezone
+            hoursArr.push(element.dt + timezone)
         })
         let newHoursArr = hoursArr.map(element => element * 1000)
         for (let index = 0; index < temperatursArr.length; index++) {
-            dataArr[index] = [newHoursArr[index], temperatursArr[index]] 
+            plotDataArr[index] = [newHoursArr[index], temperatursArr[index]] 
         }
-        object = {
+        plotDetail = {
             options: {
                 chart: {
                     zoom: {
@@ -50,7 +46,7 @@ function Hourly(props) {
                 },
                 tooltip: {
                     x: {
-                        format: 'dd MMMM hh:00'
+                        format: 'dd MMM HH:00'
                     },
                 },
                 markers: {
@@ -64,7 +60,7 @@ function Hourly(props) {
             },
             series: [{
                 name: "Temperature",
-                data: dataArr,
+                data: plotDataArr,
             }]
         }
     }
@@ -76,8 +72,8 @@ function Hourly(props) {
             <div className="weather-hourly">
                 <ReactApexChart
                     className="plot"
-                    options={object.options}
-                    series={object.series}
+                    options={plotDetail.options}
+                    series={plotDetail.series}
                     type="area"
                     width="1070"
                     height= "200"
