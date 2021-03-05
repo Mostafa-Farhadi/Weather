@@ -19,7 +19,7 @@ function Days(props) {
             </div>
             <img className="weather-icon" src={`http://openweathermap.org/img/w/${iconcode}.png`} alt="icon"/>
             <p className="humidity">{humidity}%</p>
-            <p className="wind-speed">{windSpeed} m/s</p>
+            <p className="wind-speed">{windSpeed}m/s</p>
         </div>
     )
 }
