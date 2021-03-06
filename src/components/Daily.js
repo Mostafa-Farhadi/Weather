@@ -15,14 +15,18 @@ function Daily(props) {
                     if (index === 0) {
                         return null
                     }
+                    const properties = {
+                        key: uuidv4(),
+                        weekDay: element.dt,
+                        maxTemp: element.temp.max,
+                        minTemp: element.temp.min,
+                        sunrise: element.sunrise,
+                        sunset: element.sunset,
+                        timezoneOffset: cityData.dailyData.timezone_offset,
+                        iconcode: element.weather[0].icon
+                    }
                     return (
-                        <Days
-                            key = {uuidv4()}
-                            time = {element.dt}
-                            minTemp={element.temp.min}
-                            maxTemp={element.temp.max}
-                            weather={element.weather[0].main}
-                        />
+                        <Days {...properties}/>
                     )}
                 )}
             </div>
@@ -35,6 +39,5 @@ const mapStateToProps = state => {
         cityData: state.cityData
     }
 }
-
 
 export default connect(mapStateToProps, null)(Daily)
