@@ -1,6 +1,6 @@
 import React from 'react'
 import sun from '../../assets/img/sun.png'
-import moon from '../../assets/img/sun.png'
+import moon from '../../assets/img/moon.png'
 
 function Days(props) {
     const {weekDay, maxTemp, minTemp, sunrise, sunset, timezoneOffset, iconcode} = props
