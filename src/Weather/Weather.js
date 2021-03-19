@@ -1,5 +1,5 @@
 import React from 'react'
-import '../assets/css/style.css'
+import '../assets/style/style.scss'
 
 import Input from '../components/Input'
 import Online from '../components/Online'
