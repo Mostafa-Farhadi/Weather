@@ -8,12 +8,12 @@ import Hourly from '../components/Hourly'
 
 function Weather() {
     return (
-        <div className="root">
+        <main id="main">
             <Input />
             <Online />
             <Daily />
             <Hourly />
-        </div>
+        </main>
     )
 }
 

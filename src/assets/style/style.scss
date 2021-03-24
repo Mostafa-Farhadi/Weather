@@ -11,7 +11,7 @@ body {
     font-family: 'Kalam', cursive;
 }
 
-.root {
+#main {
     text-align: center;
     margin-top: 25px;
     border-radius: 40px;
@@ -22,43 +22,50 @@ body {
     background: linear-gradient(to bottom, #34495e, #192a56, #273c75, #40739e, #487eb0, #2c3e50 );
 }
 
-#input {
-    border: none;
-    color: #eee;
-    outline: none;
-    background: none;
-    font-size: $fontSize;
-    padding: 20px 10px 20px 20px;
-    border-radius: 25px;
-    box-shadow: inset 8px 8px 8px #2f4155, inset -8px -8px 8px #2f4155;
-    width: 300px;
-    @include mQ(500) {
-        width: 50vw;
+// * Input Section ---------------------------------------------------------
+#input-city {
+    .input {
+        border: none;
+        color: #eee;
+        outline: none;
+        background: none;
+        font-size: $fontSize;
+        padding: 20px 10px 20px 20px;
+        border-radius: 25px;
+        box-shadow: inset 8px 8px 8px #2f4155, inset -8px -8px 8px #2f4155;
+        width: 300px;
+        @include mQ(500) {
+            width: 50vw;
+        }
     }
 }
 
-.city-countary {
-    font-size: ($fontSize * 2);
-    font-weight: $fontWeight;
+// * Online Section ---------------------------------------------------------
+#online-forcast {
+    .city-countary {
+        font-size: ($fontSize * 2);
+        font-weight: $fontWeight;
+    }
+    
+    .date {
+        font-size: $fontSize;
+    }
+    
+    .temprature {
+        font-size: ($fontSize * 2);
+        font-weight: $fontWeight;
+    }
+    
+    .weather {
+        font-size: ($fontSize * 1.8);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
-.date {
-    font-size: $fontSize;
-}
-
-.temprature {
-    font-size: ($fontSize * 2);
-    font-weight: $fontWeight;
-}
-
-.weather {
-    font-size: ($fontSize * 1.8);
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
+// * Daily Section ---------------------------------------------------------
 #daily-forcast {
     font-size: $fontSize;
     display: flex;
@@ -72,36 +79,37 @@ body {
     }
 
     @include scroll;
-}
 
-.temperature-container {
-    display: flex;
-    justify-content: center;
-}
-
-.min-temperature {
-    font-size: ($fontSize - 4px);
-}
-
-.max-temperature {
-    font-size: ($fontSize - 2px);
-    font-weight: $fontWeight;
-}
-
-.sunrise-container, .sunset-container {
-    display: flex;
-    justify-content: center;
-
-    p {
-        margin-top: 6px;
+    .temperature-container {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .min-temperature {
+        font-size: ($fontSize - 4px);
+    }
+    
+    .max-temperature {
+        font-size: ($fontSize - 2px);
+        font-weight: $fontWeight;
+    }
+    
+    .sunrise-container, .sunset-container {
+        display: flex;
+        justify-content: center;
+    
+        p {
+            margin-top: 6px;
+        }
+    }
+    
+    .sun-moon-icon {
+        width: 50px;
     }
 }
 
-.sun-moon-icon {
-    width: 50px;
-}
-
-#weather-hourly {
+// * Hourly Section ---------------------------------------------------------
+#hourly-forcast {
     color: red;
     margin-top: 30px;
     overflow-x: auto;
