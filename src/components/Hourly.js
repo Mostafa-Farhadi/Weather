@@ -69,7 +69,7 @@ function Hourly(props) {
         cityData.loading ? (
             ''
         ) : (
-            <div className="weather-hourly">
+            <section id="weather-hourly">
                 <ReactApexChart
                     className="plot"
                     options={plotDetail.options}
@@ -78,7 +78,7 @@ function Hourly(props) {
                     width="1070"
                     height= "200"
                 />
-            </div>
+            </section>
         )
     )
 }

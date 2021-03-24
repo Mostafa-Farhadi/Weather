@@ -10,7 +10,7 @@ function Daily(props) {
         cityData.loading ? (
             ''
         ) : (
-            <div className="daily-forcast">
+            <secttion id="daily-forcast">
                 {cityData.dailyData.daily.map((element, index) => {
                     if (index === 0) {
                         return null
@@ -29,7 +29,7 @@ function Daily(props) {
                         <Days {...properties}/>
                     )}
                 )}
-            </div>
+            </secttion>
         )
     )
 }

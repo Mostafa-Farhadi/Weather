@@ -14,17 +14,17 @@ function Input(props) {
     }
 
     return (
-        <div>
+        <section>
             <input
             type="text"
             placeholder="City..."
-            className="input"
+            id="input"
             autoFocus
             value={cityName}
             onChange={cityNameHandler}
             onKeyPress={searchPressHandler}
             />
-        </div>
+        </section>
     )
 }
 

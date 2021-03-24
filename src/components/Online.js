@@ -14,7 +14,7 @@ function Online(props) {
     };
 
     return (
-        <div className="online">
+        <section id="online">
             {
                 cityData.loading ? (
                     ''
@@ -27,7 +27,7 @@ function Online(props) {
                     </div>
                 )
             }
-        </div>
+        </section>
     )
 }
 

@@ -22,7 +22,7 @@ body {
     background: linear-gradient(to bottom, #34495e, #192a56, #273c75, #40739e, #487eb0, #2c3e50 );
 }
 
-.input {
+#input {
     border: none;
     color: #eee;
     outline: none;
@@ -59,7 +59,7 @@ body {
     justify-content: center;
 }
 
-.daily-forcast {
+#daily-forcast {
     font-size: $fontSize;
     display: flex;
     flex-direction: row;
@@ -101,7 +101,7 @@ body {
     width: 50px;
 }
 
-.weather-hourly {
+#weather-hourly {
     color: red;
     margin-top: 30px;
     overflow-x: auto;
