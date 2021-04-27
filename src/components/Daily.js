@@ -7,7 +7,7 @@ function Daily(props) {
     const {cityData} = props
     
     return (
-        cityData.loading ? (
+        cityData.loading || cityData.errorBoolean ? (
             ''
         ) : (
             <secttion id="daily-forcast">

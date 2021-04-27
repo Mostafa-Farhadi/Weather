@@ -5,7 +5,8 @@ const initialState = {
     onlineData: '',
     dailyData: '',
     hourlyData: '',
-    error: ''
+    error: '',
+    errorBoolean: false
 }
 
 const cityReducer = (state = initialState,  action) => {
@@ -22,7 +23,8 @@ const cityReducer = (state = initialState,  action) => {
                 onlineData: action.onlineData,
                 dailyData: action.dailyData,
                 hourlyData: action.hourlyData,
-                error: ''
+                error: '',
+                errorBoolean: false
             }
 
         case FETCH_CITY_FAILURE:
@@ -31,7 +33,8 @@ const cityReducer = (state = initialState,  action) => {
                 onlineData: '',
                 dailyData: '',
                 hourlyData: '',
-                error: action.error
+                error: action.error,
+                errorBoolean: true
             }
 
         default: return state

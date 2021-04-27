@@ -16,7 +16,7 @@ function Online(props) {
     return (
         <section id="online-forcast">
             {
-                cityData.loading ? (
+                cityData.loading || cityData.errorBoolean ? (
                     ''
                 ) : (
                     <div>

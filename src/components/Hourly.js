@@ -9,7 +9,7 @@ function Hourly(props) {
     let plotDetail = {}
     let plotDataArr = []
     
-    if (!cityData.loading) {
+    if (!cityData.loading && !cityData.errorBoolean) {
         cityData.hourlyData.list.forEach(element => {
             temperatursArr.push(Math.floor(element.main.temp))
             const timezone = cityData.hourlyData.city.timezone
@@ -66,7 +66,7 @@ function Hourly(props) {
     }
 
     return (
-        cityData.loading ? (
+        cityData.loading || cityData.errorBoolean ? (
             ''
         ) : (
             <section id="hourly-forcast">
