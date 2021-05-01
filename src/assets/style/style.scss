@@ -37,7 +37,6 @@ body {
         @include mQ(500px) {
             width: 50vw;
         }
-        @include Animations(inputAnm, 0s);
     }
 }
 
@@ -46,18 +45,15 @@ body {
     .city-countary {
         font-size: ($fontSize * 2);
         font-weight: $fontWeight;
-        @include Animations(cityCountaryAnm, 0s);
     }
     
     .date {
         font-size: $fontSize;
-        @include Animations(dateAnm, 1s);
     }
     
     .temprature {
         font-size: ($fontSize * 2);
         font-weight: $fontWeight;
-        @include Animations(tempratureAnm, 2s);
     }
     
     .weather {
@@ -66,7 +62,6 @@ body {
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        @include Animations(weatherAnm, 3s);
     }
 }
 
@@ -79,10 +74,6 @@ body {
     overflow-x: auto;
 
     @include scroll;
-
-    .daily-container {
-        @include Animations(dailyContainer, 4s);
-    }
 
     p {
         margin: 0;
@@ -124,7 +115,6 @@ body {
     overflow-x: auto;
     overflow-Y: hidden;
     
-    @include Animations(hourlyForcast, 5s);
 
     p {
         padding: 0 30px;
@@ -133,6 +123,3 @@ body {
 
     @include scroll;
 }
-
-// * Animations ---------------------------------------------------------
-@include keyframes;
