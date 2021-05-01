@@ -1,0 +1,3 @@
+export const FETCH_CITY_REQUEST: string = 'FETCH_CITY_REQUEST';
+export const FETCH_CITY_SUCCESS: string = 'FETCH_CITY_SUCCESS';
+export const FETCH_CITY_FAILURE: string = 'FETCH_CITY_FAILURE';

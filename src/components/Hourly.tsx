@@ -1,24 +1,23 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import ReactApexChart from 'react-apexcharts'
+import { connect } from 'react-redux';
+import ReactApexChart from 'react-apexcharts';
 
-function Hourly(props) {
+function Hourly(props: any) {
     const {cityData} = props;
-    let temperatursArr = []
-    let hoursArr = []
-    let plotDetail = {}
-    let plotDataArr = []
-    
+    const temperatursArr: number[] = [];
+    const hoursArr: number[] = [];
+    const plotDataArr: any[] = [];
+    let plotDetail: any = {};
+
     if (!cityData.loading && !cityData.errorBoolean) {
-        cityData.hourlyData.list.forEach(element => {
-            temperatursArr.push(Math.floor(element.main.temp))
-            const timezone = cityData.hourlyData.city.timezone
-            hoursArr.push(element.dt + timezone)
+        cityData.hourlyData.list.forEach((element: any) => {
+            temperatursArr.push(Math.floor(element.main.temp));
+            const timezone = cityData.hourlyData.city.timezone;
+            hoursArr.push(element.dt + timezone);
         })
-        let newHoursArr = hoursArr.map(element => element * 1000)
+        const newHoursArr = hoursArr.map(element => element * 1000);
         for (let index = 0; index < temperatursArr.length; index++) {
-            plotDataArr[index] = [newHoursArr[index], temperatursArr[index]] 
-        }
+            plotDataArr[index] = [newHoursArr[index], temperatursArr[index]];
+        };
         plotDetail = {
             options: {
                 chart: {
@@ -62,31 +61,30 @@ function Hourly(props) {
                 name: "Temperature",
                 data: plotDataArr,
             }]
-        }
-    }
+        };
+    };
 
     return (
-        cityData.loading || cityData.errorBoolean ? (
-            ''
-        ) : (
-            <section id="hourly-forcast">
-                <ReactApexChart
-                    className="plot"
-                    options={plotDetail.options}
-                    series={plotDetail.series}
-                    type="area"
-                    width="1070"
-                    height= "200"
-                />
-            </section>
-        )
-    )
-}
+        <section id="hourly-forcast">
+            {cityData.loading || cityData.errorBoolean ? (
+                ''
+            ) : (
+                    <ReactApexChart
+                        options={plotDetail.options}
+                        series={plotDetail.series}
+                        type="area"
+                        width="1070"
+                        height= "200"
+                    />
+            )}
+        </section>
+    );
+};
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
     return {
         cityData: state.cityData
     };
 };
 
-export default connect(mapStateToProps, null)(Hourly)
+export default connect(mapStateToProps, null)(Hourly);
