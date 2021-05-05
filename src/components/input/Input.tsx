@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { fetchCity } from '../redux/city/cityActions';
+import { fetchCity } from '../../redux/city/cityActions';
 
 interface Iprops {
     fetchCity: Function;
