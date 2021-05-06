@@ -1,0 +1,19 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
+
+.dailyForcast {
+    font-size: $fontSize;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow-x: auto;
+
+    @include scroll;
+
+    p {
+        margin: 0;
+        padding: 2px 10px;
+    }
+
+    
+}

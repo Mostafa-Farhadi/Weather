@@ -1,0 +1,31 @@
+@import '../../scss/mixins.scss';
+@import '../../scss/variables.scss';
+
+.dailyContainer {
+    .temperatureContainer {
+        display: flex;
+        justify-content: center;
+    }
+
+    .minTemperature {
+        font-size: ($fontSize - 4px);
+    }
+
+    .maxTemperature {
+        font-size: ($fontSize - 2px);
+        font-weight: $fontWeight;
+    }
+
+    .sunriseContainer, .sunsetContainer {
+        display: flex;
+        justify-content: center;
+
+        p {
+            margin-top: 6px;
+        }
+
+        .sunMoonIcon {
+            width: 50px;
+        }
+    }
+}

@@ -1,0 +1,25 @@
+@import '../../scss/variables.scss';
+
+.onlineForcast {
+    .cityCountary {
+        font-size: ($fontSize * 2);
+        font-weight: $fontWeight;
+    }
+    
+    .date {
+        font-size: $fontSize;
+    }
+    
+    .temprature {
+        font-size: ($fontSize * 2);
+        font-weight: $fontWeight;
+    }
+    
+    .weather {
+        font-size: ($fontSize * 1.8);
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+}
