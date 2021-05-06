@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import Weather from './pages/Weather';
 import store from './redux/store';
 import { Provider } from 'react-redux';
-import './style/global.scss';
+import './scss/global.scss';
 
 export default function App() {
     return (
