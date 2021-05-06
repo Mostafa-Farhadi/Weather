@@ -1,11 +1,23 @@
 import { connect } from 'react-redux';
-import Days from '../days/Days';
+import Days from './Days';
 import { v4 as uuidv4 } from 'uuid';
+import style from '../scss/components/daily.module.scss';
+
+interface IProperties {
+    key: string;
+    weekDay: number;
+    maxTemp: number;
+    minTemp: number;
+    sunrise: number;
+    sunset: number;
+    timezoneOffset: number;
+    iconcode: string;
+};
 
 function Daily(props: any) {
     const {cityData} = props;
     return (
-        <section id="daily-forcast">
+        <section className={style.dailyForcast}>
             {cityData.loading || cityData.errorBoolean ? (
                     ''
                 ) : (
@@ -13,7 +25,7 @@ function Daily(props: any) {
                             if (index === 0) {
                                 return null;
                             }
-                            const properties = {
+                            const properties: IProperties = {
                                 key: uuidv4(),
                                 weekDay: element.dt,
                                 maxTemp: element.temp.max,

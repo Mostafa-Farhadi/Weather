@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
-import { fetchCity } from '../../redux/city/cityActions';
+import { fetchCity } from '../redux/city/cityActions';
+
+import style from '../scss/components/input.module.scss'
 
 interface Iprops {
     fetchCity: Function;
@@ -8,9 +10,9 @@ interface Iprops {
 
 function Input(props: Iprops) {
     const [cityName, setCityName] = useState<string>('');
-    const cityNameHandler = (event: any) => setCityName(event.target.value);
+    const cityNameHandler = (event: any): void => setCityName(event.target.value);
     const {fetchCity} = props;
-    const searchPressHandler = (event: any) => {
+    const searchPressHandler = (event: any): void => {
         if (event.key === "Enter") {
             fetchCity(cityName);
             setCityName('');
@@ -18,11 +20,11 @@ function Input(props: Iprops) {
     };
     
     return (
-        <section id="input-city">
+        <section className={style.inputSection}>
             <input
             type="text"
             placeholder="City..."
-            className="input"
+            className={style.input}
             autoFocus
             value={cityName}
             onChange={cityNameHandler}
@@ -34,7 +36,7 @@ function Input(props: Iprops) {
 
 const mapDispatchToProps = (dispatch: Function) => {
     return {
-        fetchCity: (cityName :string) => dispatch(fetchCity(cityName))
+        fetchCity: (cityName :string): void => dispatch(fetchCity(cityName))
     };
 };
 

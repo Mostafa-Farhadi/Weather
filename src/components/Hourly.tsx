@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import ReactApexChart from 'react-apexcharts';
+import style from '../scss/components/hourly.module.scss'
 
 function Hourly(props: any) {
     const {cityData} = props;
@@ -11,11 +12,11 @@ function Hourly(props: any) {
     if (!cityData.loading && !cityData.errorBoolean) {
         cityData.hourlyData.list.forEach((element: any) => {
             temperatursArr.push(Math.floor(element.main.temp));
-            const timezone = cityData.hourlyData.city.timezone;
+            const timezone: number = cityData.hourlyData.city.timezone;
             hoursArr.push(element.dt + timezone);
         })
-        const newHoursArr = hoursArr.map(element => element * 1000);
-        for (let index = 0; index < temperatursArr.length; index++) {
+        const newHoursArr: number[] = hoursArr.map(element => element * 1000);
+        for (let index: number = 0; index < temperatursArr.length; index++) {
             plotDataArr[index] = [newHoursArr[index], temperatursArr[index]];
         };
         plotDetail = {
@@ -65,7 +66,7 @@ function Hourly(props: any) {
     };
 
     return (
-        <section id="hourly-forcast">
+        <section className={style.hourlyForcast}>
             {cityData.loading || cityData.errorBoolean ? (
                 ''
             ) : (
