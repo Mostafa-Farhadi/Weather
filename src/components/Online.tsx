@@ -1,16 +1,10 @@
 import { connect } from 'react-redux';
 import style from '../scss/components/onilne.module.scss';
-
-interface Itime {
-    getDay: Function;
-    getDate: Function;
-    getMonth: Function;
-    getFullYear: Function;
-};
+import { Time } from "../interfaces";
 
 function Online(props: any) {
     const {cityData} = props;
-    const dateBuilder = (time: Itime): string => {
+    const dateBuilder = (time: Time): string => {
         const months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         const days: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
         const day: string = days[time.getDay()];

@@ -1,18 +1,9 @@
 import sun from '../assets/img/sun.png';
 import moon from '../assets/img/moon.png';
 import style from '../scss/components/days.module.scss';
+import { DaysProps } from "../interfaces";
 
-interface IProps {
-    weekDay: number;
-    maxTemp: number;
-    minTemp: number;
-    sunrise: number;
-    sunset: number;
-    timezoneOffset: number;
-    iconcode: string;
-};
-
-function Days(props: IProps) {
+function Days(props: DaysProps) {
     const {weekDay, maxTemp, minTemp, sunrise, sunset, timezoneOffset, iconcode} = props;
     const futureDays = (millisecond: number): string => {
         const date: Date = new Date(millisecond * 1000);

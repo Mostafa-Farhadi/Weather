@@ -1,18 +1,14 @@
 import { useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchCity } from '../redux/city/cityActions';
-
 import style from '../scss/components/input.module.scss'
+import { InputProps, SearchEvent, CityEvent } from "../interfaces";
 
-interface Iprops {
-    fetchCity: Function;
-};
-
-function Input(props: Iprops) {
+function Input(props: InputProps) {
+    const { fetchCity } = props;
     const [cityName, setCityName] = useState<string>('');
-    const cityNameHandler = (event: any): void => setCityName(event.target.value);
-    const {fetchCity} = props;
-    const searchPressHandler = (event: any): void => {
+    const cityNameHandler = (event: CityEvent): void => setCityName(event.target.value);
+    const searchPressHandler = (event: SearchEvent): void => {
         if (event.key === "Enter") {
             fetchCity(cityName);
             setCityName('');
@@ -34,7 +30,7 @@ function Input(props: Iprops) {
     );
 };
 
-const mapDispatchToProps = (dispatch: Function) => {
+const mapDispatchToProps = (dispatch: any) => {
     return {
         fetchCity: (cityName :string): void => dispatch(fetchCity(cityName))
     };
