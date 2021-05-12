@@ -16,7 +16,7 @@ const fetchCitySeuccess = (onlineData: object, dailyData: object, hourlyData: ob
     };
 };
 
-const fetchCityFailure = (error: boolean) => {
+const fetchCityFailure = (error: string) => {
     return {
         type: FETCH_CITY_FAILURE,
         error: error
@@ -37,19 +37,11 @@ export const fetchCity = (cityName: string) => {
                     const hourlyData = response.data;
                     dispatch(fetchCitySeuccess(onlineData, dailyData, hourlyData));
                 })
-                .catch(error => {
-                    const errorMsg = error.message
-                    dispatch(fetchCityFailure(errorMsg))
-                });
             })
-            .catch(error => {
-                const errorMsg = error.message
-                dispatch(fetchCityFailure(errorMsg))
-            });
         })
         .catch(error => {
             const errorMsg = error.message
             dispatch(fetchCityFailure(errorMsg))
         });
     };
-}
+};
