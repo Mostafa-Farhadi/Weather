@@ -1,4 +1,3 @@
-// import axios from 'axios';
 import {FETCH_CITY_REQUEST, FETCH_CITY_SUCCESS, FETCH_CITY_FAILURE} from './cityTypes';
 
 const fetchCityRequest = () => {

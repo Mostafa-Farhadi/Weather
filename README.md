@@ -6,4 +6,3 @@ It is made using this tools:
 * React-Redux
 * Apex Charts
 * openweathermap API
-* Axios
